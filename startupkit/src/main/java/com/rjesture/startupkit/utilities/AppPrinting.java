@@ -2,6 +2,7 @@ package com.rjesture.startupkit.utilities;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 /**
@@ -63,6 +64,13 @@ public class AppPrinting {
             handleCatch(e);
         }
     }
+
+    public static void showEditTextError(EditText editText, Context mContext, String message) {
+        editText.setError(message);
+        editText.requestFocus();
+        showToast(mContext,message);
+    }
+
 
 
 }
