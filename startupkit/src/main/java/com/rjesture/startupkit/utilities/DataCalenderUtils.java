@@ -57,11 +57,11 @@ public class DataCalenderUtils {
         return "error";
     }
 
-    public String convertEpochDate(String timestamp) {
+    public static String convertEpochDate(String timestamp) {
         return Long.toString(Long.parseLong(timestamp) * 1000);
     }
 
-    public String readTimeStampDate(String timeStampDate) {
+    public static String readTimeStampDate(String timeStampDate) {
         try {
             Date date = new Date(Long.parseLong(timeStampDate));
             SimpleDateFormat format = new SimpleDateFormat(patternFormat);
@@ -73,7 +73,7 @@ public class DataCalenderUtils {
         return "";
     }
 
-    public int getDays(String startDate) {
+    public static int getDays(String startDate) {
         try {
             long MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
             SimpleDateFormat dateFormat = new SimpleDateFormat(patternFormat);
@@ -88,7 +88,7 @@ public class DataCalenderUtils {
         return 0;
     }
 
-    public String getCurrentDate() {
+    public static String getCurrentDate() {
         try {
             Date c = Calendar.getInstance().getTime();
             System.out.println("Current time => " + c);
@@ -101,7 +101,7 @@ public class DataCalenderUtils {
         return "";
     }
 
-    public String addDays(String oldDate, int days) {
+    public static String addDays(String oldDate, int days) {
         DateFormat formatter = new SimpleDateFormat(patternFormat, Locale.US);
         try {
             Date date = formatter.parse(oldDate);

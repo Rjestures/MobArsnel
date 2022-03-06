@@ -64,6 +64,10 @@ public class AppPrinting {
             handleCatch(e);
         }
     }
+    public static void showApiLog(String title, String message) {
+        Log.v(title, message);
+    }
+
 
     public static void showEditTextError(EditText editText, Context mContext, String message) {
         editText.setError(message);

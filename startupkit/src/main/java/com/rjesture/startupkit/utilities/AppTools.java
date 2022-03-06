@@ -3,20 +3,19 @@ package com.rjesture.startupkit.utilities;
 import static com.rjesture.startupkit.utilities.AppPrinting.handleCatch;
 import static com.rjesture.startupkit.utilities.AppPrinting.showToast;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
 import android.provider.Settings;
+import android.util.TypedValue;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -160,6 +159,11 @@ public class AppTools {
             handleCatch(ex);
         }
         return false;
+    }
+
+    public static int dpToPx(int dp, Context context) {
+        Resources r = context.getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
 

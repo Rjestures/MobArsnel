@@ -29,6 +29,17 @@ public class DataValidator {
         }
         return true;
     }
+    
+    public static Boolean checkMoneyAmount(EditText editText, Context mContext) {
+        if (getEtText(editText).isEmpty()) {
+            showEditTextError(editText, mContext, mContext.getString(R.string.amountCannotBeBlank));
+            return false;
+        } else if (Integer.parseInt(getEtText(editText))==0) {
+            showEditTextError(editText, mContext, mContext.getString(R.string.amountCannotBeZero));
+            return false;
+        }
+        return true;
+    }
 
     public static Boolean checkDataFeild(EditText editText, Context mContext, String message) {
         if (getEtText(editText).isEmpty()) {
