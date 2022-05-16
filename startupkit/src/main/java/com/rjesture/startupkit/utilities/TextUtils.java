@@ -12,10 +12,20 @@ import android.util.Base64;
 
 import androidx.annotation.NonNull;
 
+import java.util.Random;
+
 /**
  * Created by Rjesture on 2/26/2022.
  */
 public class TextUtils {
+
+    public static int randInt(int min, int max) {
+        Random rand = new Random();
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+        return randomNum;
+    }
+
+
     public static String showDoubleDigit(int digit) {
         String finalDig = (digit < 10 ? "0" : "") + digit;
         return finalDig;

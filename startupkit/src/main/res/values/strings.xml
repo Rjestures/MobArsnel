@@ -9,5 +9,7 @@
     <string name="mobileNumberInvalidError">Mobile number is invalid</string>
     <string name="amountCannotBeBlank">Amount cannot be blank</string>
     <string name="amountCannotBeZero">Amount cannot be 0</string>
+    <string name="emailIDBlankError">Email Id cannot be blank</string>
+    <string name="emailIdInvalidError">please enter a valid email Id</string>
 
 </resources>

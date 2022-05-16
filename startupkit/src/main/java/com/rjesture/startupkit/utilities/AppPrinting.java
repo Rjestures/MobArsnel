@@ -5,6 +5,8 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 /**
  * Created by Rjesture on 2/20/2022.
  */
@@ -70,6 +72,12 @@ public class AppPrinting {
 
 
     public static void showEditTextError(EditText editText, Context mContext, String message) {
+        editText.setError(message);
+        editText.requestFocus();
+        showToast(mContext,message);
+    }
+
+    public static void showEditTextError(TextInputEditText editText, Context mContext, String message) {
         editText.setError(message);
         editText.requestFocus();
         showToast(mContext,message);

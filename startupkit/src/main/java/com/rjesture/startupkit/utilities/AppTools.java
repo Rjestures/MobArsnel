@@ -2,6 +2,7 @@ package com.rjesture.startupkit.utilities;
 
 import static com.rjesture.startupkit.utilities.AppPrinting.handleCatch;
 import static com.rjesture.startupkit.utilities.AppPrinting.showToast;
+import static com.rjesture.startupkit.utilities.AppPrinting.showToastShort;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,11 +27,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Random;
+
 /**
  * Created by Rjesture on 2/20/2022.
  */
 public class AppTools {
     private static boolean doubleBackToExitPressedOnce;
+
 
 
     public static String getAppVersion(Activity context) {
@@ -85,7 +89,7 @@ public class AppTools {
             return;
         }
         doubleBackToExitPressedOnce = true;
-        showToast(mActivity, "Press again to exit");
+        showToastShort(mActivity, "Press again to exit");
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 1000);
     }
 
@@ -95,7 +99,7 @@ public class AppTools {
             return;
         }
         doubleBackToExitPressedOnce = true;
-        showToast(mActivity, message);
+        showToastShort(mActivity, message);
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 1000);
     }
 
