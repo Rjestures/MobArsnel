@@ -43,6 +43,28 @@ public class DataValidator {
         }
         return true;
     }
+    public static Boolean checkPincode(EditText editText, Context mContext) {
+        if (getEtText(editText).isEmpty()) {
+            showEditTextError(editText, mContext, "Pincode cannot be blank");
+            return false;
+        } else if (getEtText(editText).length() < 6) {
+            showEditTextError(editText, mContext, "Invalid pincode");
+            return false;
+        }
+        return true;
+    }
+
+    public static Boolean checkPincode(TextInputEditText editText, Context mContext) {
+        if (getEtText(editText).isEmpty()) {
+            showEditTextError(editText, mContext, "Pincode cannot be blank");
+            return false;
+        } else if (getEtText(editText).length() < 6) {
+            showEditTextError(editText, mContext, "Invalid pincode");
+            return false;
+        }
+        return true;
+    }
+
     public static boolean isEmailAddressValid(String email)
     {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+

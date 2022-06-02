@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.TypedValue;
 import android.widget.EditText;
@@ -34,8 +35,23 @@ import java.util.Random;
  */
 public class AppTools {
     private static boolean doubleBackToExitPressedOnce;
+    private static long mLastClickTime = 0L;
 
+    public static boolean isClickAllowed() {
+        if ((SystemClock.elapsedRealtime() - mLastClickTime) > 2000) {
+            mLastClickTime = SystemClock.elapsedRealtime();
+            return true;
+        }
+        return false;
+    }
 
+    public static boolean isClickAllowed(long timeInMillis) {
+        if ((SystemClock.elapsedRealtime() - mLastClickTime) > timeInMillis) {
+            mLastClickTime = SystemClock.elapsedRealtime();
+            return true;
+        }
+        return false;
+    }
 
     public static String getAppVersion(Activity context) {
         String latestVersion = "";

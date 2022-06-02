@@ -6,21 +6,34 @@ import android.util.Log;
  * Created by Rjesture on 2/20/2022.
  */
 public class ApiStrings {
-    public static String apiUrl;
-    public static String apiRequest;
-    public static String apiString;
-    public static String apiRequestError;
-    public static String apiResponse;
-    public static String apiResponseError;
-    public static String defResponse="No data available";
+    String defResponse = "No data available";
+    String assignedString = "api";
 
-    public static void setApiString(String assignedString) {
-        apiString = assignedString;
-        apiUrl = assignedString + "_Url";
-        apiRequest = assignedString + "_Request";
-        apiRequestError = assignedString + "_RequestError";
-        apiResponse = assignedString + "_Response";
-        apiResponseError = assignedString + "_ResponseError";
+    public ApiStrings(String assignedString) {
+        this.assignedString = assignedString;
     }
 
+    public String getApiUrl() {
+        return assignedString + "_Url";
+    }
+
+    public String getApiRequest() {
+        return assignedString + "_Request";
+    }
+
+    public String getApiRequestError() {
+        return assignedString + "_RequestError";
+    }
+
+    public String getApiResponse() {
+        return assignedString + "_Response";
+    }
+
+    public String getApiResponseError() {
+        return assignedString + "_ResponseError";
+    }
+
+    public String getDefResponse() {
+        return defResponse;
+    }
 }
