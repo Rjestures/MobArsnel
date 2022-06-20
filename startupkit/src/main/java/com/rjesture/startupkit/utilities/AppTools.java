@@ -14,6 +14,7 @@ import android.content.res.Resources;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.Settings;
@@ -52,19 +53,6 @@ public class AppTools {
         }
         return false;
     }
-
-    public static String getAppVersion(Activity context) {
-        String latestVersion = "";
-        try {
-            PackageManager manager = context.getPackageManager();
-            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
-            latestVersion = String.valueOf(info.versionName);
-        } catch (Exception e) {
-            handleCatch(e, context);
-        }
-        return latestVersion;
-    }
-
     public static boolean isNetworkOnline(Context context) {
         boolean status = false;
         try {
@@ -86,6 +74,69 @@ public class AppTools {
         }
         return status;
     }
+    public static boolean isLocationEnabled(Context context) {
+        try {
+            LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            boolean gps_enabled = false;
+            boolean network_enabled = false;
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            if (!gps_enabled && !network_enabled) {
+                // notify user
+                new AlertDialog.Builder(context)
+                        .setMessage(R.string.gps_network_not_enabled)
+                        .setPositiveButton(R.string.open_location_settings, (paramDialogInterface, paramInt) -> {
+                            context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        })
+                        .setCancelable(false)
+                        .show();
+            } else {
+                return true;
+            }
+        } catch (Exception ex) {
+            handleCatch(ex);
+        }
+        return false;
+    }
+    public static void rateApplication(Context context){
+        try {
+            context.startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=" + context.getPackageName())));
+        } catch (android.content.ActivityNotFoundException e) {
+            context.startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+        }
+
+    }
+    public static void shareApplication(Context context, String appName) {
+        String message ="*" + appName + " App" + "*" + "\n" + "Hi There!\n" +
+                "Download the " + appName + " app and register yourself. \n" +
+                "Download link - https://play.google.com/store/apps/details?id=" + context.getPackageName() + "\n" +
+                "Hava a nice day!\n" +
+                appName + " Operation Team";
+        shareApplicationCustom(context,message);
+    }
+    public static void shareApplicationCustom(Context context,  String message) {
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, message);
+        context.startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+
+    public static String getAppVersion(Activity context) {
+        String latestVersion = "";
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            latestVersion = String.valueOf(info.versionName);
+        } catch (Exception e) {
+            handleCatch(e, context);
+        }
+        return latestVersion;
+    }
+
 
     public static String getEtText(TextInputEditText editText) {
         return editText.getText().toString().trim();
@@ -155,31 +206,6 @@ public class AppTools {
         return null;
     }
 
-    public static boolean isLocationEnabled(Context context) {
-        try {
-            LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-            boolean gps_enabled = false;
-            boolean network_enabled = false;
-            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
-            if (!gps_enabled && !network_enabled) {
-                // notify user
-                new AlertDialog.Builder(context)
-                        .setMessage(R.string.gps_network_not_enabled)
-                        .setPositiveButton(R.string.open_location_settings, (paramDialogInterface, paramInt) -> {
-                            context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                        })
-                        .setCancelable(false)
-                        .show();
-            } else {
-                return true;
-            }
-        } catch (Exception ex) {
-            handleCatch(ex);
-        }
-        return false;
-    }
 
     public static int dpToPx(int dp, Context context) {
         Resources r = context.getResources();
